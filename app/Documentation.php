@@ -119,4 +119,23 @@ class Documentation
             '4.2' => '4.2',
         ];
     }
+
+
+    public function getPrevSection($version, $sectionPage)
+    {
+        $index = $this->getIndex($version);
+
+        preg_match_all("/(\<a.*?\<\/a>.*)\n.+\/docs\/".$version."\/".preg_quote($sectionPage)."/", $index, $matches); 
+
+        return $matches[1]; 
+    }
+
+    public function getNextSection($version, $sectionPage)
+    {
+        $index = $this->getIndex($version);
+
+        preg_match_all("/\/docs\/".$version."\/".preg_quote($sectionPage)."[\s\S]*?(?=\n.*?\<a href=\"\/docs)[\s]+\<li\>(\<a.*?<\/a\>)/", $index, $matches);
+
+        return $matches[1]; 
+    }
 }

@@ -38,6 +38,10 @@
 
 	<article>
 		{!! $content !!}
+		<nav aria-labelledby="helpdoc_prev_next" class="nav_prev_next">
+			<span>{!! $prevLink ? '< ' . $prevLink[0] : '' !!}</span>
+			<span>{!! $nextLink ? $nextLink[0] . ' >' : '' !!}</span>
+		</nav>
 	</article>
 </div>
 @endsection

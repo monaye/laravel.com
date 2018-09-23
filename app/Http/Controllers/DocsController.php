@@ -83,6 +83,10 @@ class DocsController extends Controller
             $canonical = 'docs/'.DEFAULT_VERSION.'/'.$sectionPage;
         }
 
+        $prevLink = $this->docs->getPrevSection($version, $sectionPage);
+        $nextLink = $this->docs->getNextSection($version, $sectionPage);
+
+
         return view('docs', [
             'title' => count($title) ? $title->text() : null,
             'index' => $this->docs->getIndex($version),
@@ -91,6 +95,8 @@ class DocsController extends Controller
             'versions' => Documentation::getDocVersions(),
             'currentSection' => $section,
             'canonical' => $canonical,
+            'prevLink' => $prevLink, 
+            'nextLink' => $nextLink,
         ]);
     }
 
